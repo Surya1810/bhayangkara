@@ -1,13 +1,19 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
-
+//Beranda
+Route::get('/', [PageController::class, 'beranda'])->name('landing');
+Route::get('/berita', [PageController::class, 'berita'])->name('berita');
+Route::get('/berita/{slug}', [PageController::class, 'detail_berita'])->name('detail.berita');
+Route::get('/tentang-kami', [PageController::class, 'tentang'])->name('tentang');
+Route::get('/kontak', [PageController::class, 'kontak'])->name('kontak');
 
 //Backend Auth
 Auth::routes();
@@ -21,4 +27,17 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/password/{id}', [ProfileController::class, 'password'])->name('profile.password');
     Route::delete('/profile/delete/{id}', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    //Category
+    Route::resource('categories', CategoryController::class);
+
+    //Post
+    Route::get('/posts/approval', [PostController::class, 'approval'])->name('posts.approval');
+    Route::get('/posts/approve/{id}', [PostController::class, 'approve'])->name('posts.approve');
+    Route::resource('posts', PostController::class);
+
+    //Anggota
+    Route::get('/anggota/approval', [UserController::class, 'approval'])->name('anggota.approval');
+    Route::get('/anggota/approve/{id}', [UserController::class, 'approve'])->name('anggota.approve');
+    Route::resource('anggota', UserController::class);
 });

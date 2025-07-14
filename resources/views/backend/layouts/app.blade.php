@@ -8,10 +8,18 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>PWRI-B | @yield('title')</title>
+    <title>@yield('title') - Admin | Partner Bhayangkara</title>
 
+    <!-- Favicons -->
+    {{-- <link rel="icon" type="image/png" href="{{ asset('favicons/favicon-96x96.png') }}" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicons/favicon.svg') }}" />
+    <link rel="shortcut icon" href="{{ asset('favicons/favicon.ico') }}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicons/apple-touch-icon.png') }}" />
+    <meta name="apple-mobile-web-app-title" content="Partner Bhayangkara" />
+    <link rel="manifest" href="{{ asset('favicons/site.webmanifest') }}" /> --}}
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900&display=swap"
+        rel='stylesheet'>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{ asset('assets/FontAwesome/6.2.1/css/all.min.css') }}">
     <!-- Sweetalert2 -->
@@ -39,51 +47,21 @@
     @stack('css')
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed layout-fixed sidebar-collapse">
     <div class="wrapper">
 
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light border-bottom-0 text-sm">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light text-sm">
             <!-- Left navbar links -->
-            <ul class="navbar-nav">
+            <ul class="navbar-nav d-block d-md-none">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i
                             class="fas fa-bars"></i></a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('home') }}" target="_blank" class="nav-link">Home</a>
                 </li>
             </ul>
 
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
-                <!-- Notifications Dropdown Menu -->
-                <li class="nav-item dropdown">
-                    <a class="nav-link" data-toggle="dropdown" href="#">
-                        <i class="far fa-bell"></i>
-                        <span class="badge badge-warning navbar-badge">15</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                        <span class="dropdown-header">15 Notifications</span>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-envelope mr-2"></i> 4 new messages
-                            <span class="float-right text-muted text-sm">3 mins</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-users mr-2"></i> 8 friend requests
-                            <span class="float-right text-muted text-sm">12 hours</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-file mr-2"></i> 3 new reports
-                            <span class="float-right text-muted text-sm">2 days</span>
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-                    </div>
-                </li>
                 <!-- Logout -->
                 <li class="nav-item dropdown mx-3">
                     <a class="btn btn-sm btn-outline-danger rounded-web" href="{{ route('logout') }}"
@@ -100,31 +78,20 @@
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar main-sidebar-custom sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar main-sidebar-custom sidebar-dark-danger elevation-4">
             <!-- Brand Logo -->
-            <a href="{{ route('dashboard') }}" class="brand-link logo-switch border-bottom-0">
-                <img src="{{ asset('assets/img/logo/main_icon_blue.png') }}" alt="logo_pwrib"
-                    class="brand-image-xl logo-xs">
-                <img src="{{ asset('assets/img/logo/light/main.png') }}" alt="logo_pwrib"
-                    class="brand-image-xs logo-xl" style="left: 12px">
+            <a href="{{ route('dashboard') }}" class="brand-link border-bottom-0 bg-white">
+                <img src="{{ asset('assets/img/logo/main_logo.png') }}" alt="Partner_Logo" class="brand-image"
+                    style="opacity: .8">
+                <span class="brand-text font-weight-bold text-sm">Partner Bhayangkara</span>
             </a>
 
             <!-- Sidebar -->
-            <div class="sidebar text-sm">
-                <!-- Sidebar user panel (optional) -->
-                {{-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                    <div class="image">
-                        <img src="{{ asset('assets/img/profile/' . Auth::user()->avatar) }}"
-                            class="img-circle elevation-2" alt="User Image">
-                    </div>
-                    <div class="info">
-                        <a href="{{ route('profile.edit') }}" class="d-block">{{ Auth::user()->name }}</a>
-                    </div>
-                </div> --}}
+            <div class="sidebar">
                 <!-- Sidebar Menu -->
-                <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent nav-collapse-hide-child nav-legacy"
-                        data-widget="treeview" role="menu" data-accordion="false">
+                <nav class="mt-3">
+                    <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview"
+                        role="menu" data-accordion="false">
                         <li class="nav-header mt-2">Home</li>
                         <li class="nav-item">
                             <a href="{{ route('dashboard') }}" class="nav-link">
@@ -134,46 +101,66 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-header mt-3">Support</li>
+                        <li class="nav-header mt-3">Admin</li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa-solid fa-align-left"></i>
+                                <i class="nav-icon fa-solid fa-file-pen "></i>
+
                                 <p>
-                                    Text
+                                    Publikasi
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a class="nav-item">
+                                        <a href="{{ route('posts.index') }}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Berita</p>
+                                        </a>
+                                    </a>
+                                </li>
+                                @if (Auth::user()->role == 'Admin')
+                                    <li class="nav-item">
+                                        <a class="nav-item">
+                                            <a href="{{ route('posts.approval') }}" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Approval</p>
+                                            </a>
+                                        </a>
+                                    </li>
+                                @endif
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fa-regular fa-address-book"></i>
+                                <i class="nav-icon fa-solid fa-user"></i>
+
                                 <p>
-                                    Project Preferences
+                                    Keanggotaan
+                                    <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa-regular fa-image"></i>
-                                <p>
-                                    Project Gallery
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa-solid fa-box-open"></i>
-                                <p>
-                                    Product
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fa-solid fa-clipboard-list"></i>
-                                <p>
-                                    Client
-                                </p>
-                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a class="nav-item">
+                                        <a href="{{ route('anggota.index') }}" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Daftar Anggota</p>
+                                        </a>
+                                    </a>
+                                </li>
+                                @if (Auth::user()->role == 'Admin')
+                                    <li class="nav-item">
+                                        <a class="nav-item">
+                                            <a href="{{ route('anggota.approval') }}" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Approval</p>
+                                            </a>
+                                        </a>
+                                    </li>
+                                @endif
+                            </ul>
                         </li>
                     </ul>
                 </nav>
@@ -195,8 +182,9 @@
                 Anything you want
             </div>
             <!-- Default to the left -->
-            <strong>&copy; 2024 <a href="{{ route('home') }}">PWRIB</a>.</strong> All rights
-            reserved.
+            <strong>Copyright &copy; 2025 <a href="{{ route('dashboard') }}" class="text-danger">Partner
+                    Bhayangkara</a></strong>
+            All rights reserved.
         </footer>
     </div>
     <!-- ./wrapper -->

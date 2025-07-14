@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $total_berita = Post::where('is_approved', true)->count();
+        $total_approval_berita = Post::where('is_approved', false)->count();
+        $total_anggota = User::where('role', 'Anggota')->where('is_active', true)->count();
+        $total_approval_anggota = User::where('role', 'Anggota')->where('is_active', false)->count();
+
+        return view('backend.dashboard', compact('total_berita', 'total_anggota', 'total_approval_berita', 'total_approval_anggota'));
     }
 }

@@ -1,16 +1,15 @@
 @extends('frontend.layouts.app')
 
-@section('meta')
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-
-    <title></title>
+@section('title')
 @endsection
 
 @push('css')
 @endpush
 
 @section('content')
+    <div class="container">
+        <h2 class="text-center my-3"><strong>Kontak</strong></h2>
+    </div>
 @endsection
 
 @push('scripts')

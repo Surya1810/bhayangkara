@@ -64,7 +64,8 @@ class ProfileController extends Controller
     public function destroy(Request $request, $id)
     {
         return redirect()->back()->with([
-            'pesan' => 'Please contact admin', 'level-alert' => 'alert-danger'
+            'pesan' => 'Please contact admin',
+            'level-alert' => 'alert-danger'
         ]);
     }
 }

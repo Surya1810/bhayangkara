@@ -1,5 +1,37 @@
+* {
+    scroll-behavior: smooth;
+    font-family: "Montserrat", sans-serif;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
 .rounded-web {
     border-radius: 20px;
+}
+
+/* Style Partnership */
+.nav-pills .nav-link {
+    border-radius: 20px;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    background-color: #e3242c !important;
+    color: #fff !important;
+    font-weight: bold;
+}
+
+.sidebar-collapse
+    .main-sidebar:hover
+    .nav-sidebar.nav-child-indent
+    .nav-treeview {
+    padding-left: 1rem;
 }
 
 /* Sweetalert custom color */
