@@ -1,6 +1,7 @@
 @extends('frontend.layouts.app')
 
 @section('title')
+    Tentang
 @endsection
 
 @push('css')
