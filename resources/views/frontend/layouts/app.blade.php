@@ -30,10 +30,36 @@
     <!-- Our style -->
     <link rel="stylesheet" href="{{ asset('assets/css/style_fe.css') }}">
 
+    <style>
+        .background-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: url('{{ asset('assets/img/background/1.png') }}');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .background-wrapper::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+        }
+    </style>
+
     @stack('css')
 </head>
 
-<body style="padding-top: 100px">
+<body style="padding-top: 85px">
+    <div class="background-wrapper"></div>
     @php
         $time = Carbon\Carbon::now();
     @endphp
@@ -41,36 +67,24 @@
     <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light shadow" aria-label="Main navigation">
         <div class="container">
             <a class="navbar-brand" href="{{ route('landing') }}">
-                <img src="{{ asset('assets/img/logo/main_logo.png') }}" alt="logo" height="65">
+                <img src="{{ asset('assets/img/logo/main_logo.png') }}" alt="logo" height="60">
             </a>
             <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse"
                 aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="navbar-collapse offcanvas-collapse justify-content-end" id="navbarsExampleDefault">
+            <div class="navbar-collapse offcanvas-collapse justify-content-end bg-light" id="navbarsExampleDefault">
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link mx-2" aria-current="page" href="{{ route('landing') }}">Beranda</a>
+                        <a class="nav-link mx-2 text-black" aria-current="page"
+                            href="{{ route('landing') }}">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link mx-2" aria-current="page" href="{{ route('tentang') }}">Tentang Kami</a>
+                        <a class="nav-link mx-2 text-black" aria-current="page" href="{{ route('tentang') }}">Tentang
+                            Kami</a>
                     </li>
-                    {{-- <li class="nav-item dropdown">
-                        <a class="nav-link mx-2 dropdown-toggle" href="#" data-bs-toggle="dropdown"
-                            aria-expanded="false">Berita</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('berita') }}">Teknologi</a></li>
-                            <li><a class="dropdown-item" href="{{ route('berita') }}">Nasional</a></li>
-                            <li><a class="dropdown-item" href="{{ route('berita') }}">Internasional</a></li>
-                            <li><a class="dropdown-item" href="{{ route('berita') }}">Politik</a></li>
-                            <li><a class="dropdown-item" href="{{ route('berita') }}">Ekonomi</a></li>
-                            <li><a class="dropdown-item" href="{{ route('berita') }}">Olahraga</a></li>
-                            <li><a class="dropdown-item" href="{{ route('berita') }}">Kegiatan Polisi</a></li>
-                            <li><a class="dropdown-item" href="{{ route('berita') }}">Lainnya</a></li>
-                        </ul>
-                    </li> --}}
                     <li class="nav-item">
-                        <a class="nav-link mx-2" aria-current="page" href="{{ route('kontak') }}">Kontak</a>
+                        <a class="nav-link mx-2 text-black" aria-current="page" href="{{ route('kontak') }}">Kontak</a>
                     </li>
                 </ul>
             </div>
@@ -82,7 +96,7 @@
             <nav class="nav" aria-label="Secondary navigation">
                 <a class="nav-link active text-decoration-none"
                     aria-current="page">{{ $time->toFormattedDateString() }}</a>
-                <a class="nav-link" href="#"><i class="fa-solid fa-envelope"></i>
+                <a class="nav-link"><i class="fa-solid fa-envelope"></i>
                     partnernewsbhayangkara@gmail.com</a>
             </nav>
         </div>

@@ -40,35 +40,37 @@
 @section('content')
     <!-- Higlight -->
     <section class="mb-4">
-        <div id="carouselExampleCaptions" class="carousel slide">
-            <div class="carousel-inner">
-                @foreach ($latest as $key => $news)
-                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                        <a href="{{ route('detail.berita', $news->slug) }}">
-                            <div class="ratio ratio-21x9">
-                                <img src="{{ asset('storage/post/' . $news->image) }}" class="d-block w-100"
-                                    alt="{{ $news->slug }}">
-                            </div>
-                            <div class="carousel-caption d-none d-md-block text-black">
-                                <h1 class="display-4 fst-italic"><strong>{{ Str::limit($news->title), 50 }}</strong></h1>
-                            </div>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-
         <div class="container my-5">
+            <div id="carouselExampleCaptions" class="carousel slide mb-3">
+                <div class="carousel-inner">
+                    @foreach ($latest as $key => $news)
+                        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                            <a href="{{ route('detail.berita', $news->slug) }}">
+                                <div class="ratio ratio-16x9">
+                                    <img src="{{ asset('storage/post/' . $news->image) }}" class="d-block w-100"
+                                        alt="{{ $news->slug }}">
+                                </div>
+                                <div class="carousel-caption d-block text-white bg-dark bg-opacity-50 p-2 rounded">
+                                    <h5 class="fw-bold mb-0 fs-6 fs-md-3 fs-lg-2">
+                                        {{ Str::limit($news->title, 50) }}
+                                    </h5>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
             <h2><strong>Berita</strong></h2>
             <div class="row mt-2">
                 @foreach ($beritas as $berita)
@@ -87,7 +89,7 @@
                                     </div>
                                     <div class="col-md-6 d-flex flex-column justify-content-between p-3">
                                         <div>
-                                            <strong class="d-inline-block mb-2 text-primary-emphasis">
+                                            <strong class="d-inline-block mb-2 text-danger-emphasis">
                                                 {{ optional($berita->category)->name ?? '-' }}
                                             </strong>
                                             <div class="mb-1 text-body-secondary">
