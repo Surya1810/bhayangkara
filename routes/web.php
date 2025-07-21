@@ -12,7 +12,11 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', [PageController::class, 'beranda'])->name('landing');
 Route::get('/berita', [PageController::class, 'berita'])->name('berita');
 Route::get('/berita/{slug}', [PageController::class, 'detail_berita'])->name('detail.berita');
+Route::get('/kategori/{slug}', [PageController::class, 'kategori'])->name('kategori');
 Route::get('/tentang-kami', [PageController::class, 'tentang'])->name('tentang');
+Route::get('/tim-redaksi', [PageController::class, 'redaksi'])->name('redaksi');
+Route::get('/lapor', [PageController::class, 'lapor'])->name('lapor');
+Route::post('/lapor/store', [PageController::class, 'laporan'])->name('lapor.store');
 Route::get('/kontak', [PageController::class, 'kontak'])->name('kontak');
 
 //Backend Auth

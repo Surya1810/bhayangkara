@@ -44,6 +44,10 @@ class CategorySeeder extends Seeder
             'slug' =>  Str::slug('Kegiatan Polisi')
         ]);
         $admin = Category::create([
+            'name' => 'Pers Rilis',
+            'slug' =>  Str::slug('Pers Rilis')
+        ]);
+        $admin = Category::create([
             'name' => 'Lainnya',
             'slug' =>  Str::slug('Lainnya')
         ]);

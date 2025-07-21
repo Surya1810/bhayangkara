@@ -41,36 +41,6 @@
     <!-- Higlight -->
     <section class="mb-4">
         <div class="container my-5">
-            <div id="carouselExampleCaptions" class="carousel slide mb-3">
-                <div class="carousel-inner">
-                    @foreach ($latest as $key => $news)
-                        <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                            <a href="{{ route('detail.berita', $news->slug) }}">
-                                <div class="ratio ratio-16x9">
-                                    <img src="{{ asset('storage/post/' . $news->image) }}" class="d-block w-100"
-                                        alt="{{ $news->slug }}">
-                                </div>
-                                <div class="carousel-caption d-block text-white bg-dark bg-opacity-50 p-2 rounded">
-                                    <h5 class="fw-bold mb-0 fs-6 fs-md-3 fs-lg-2">
-                                        {{ Str::limit($news->title, 50) }}
-                                    </h5>
-                                </div>
-                            </a>
-                        </div>
-                    @endforeach
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-
             <h2><strong>Berita</strong></h2>
             <div class="row mt-2">
 

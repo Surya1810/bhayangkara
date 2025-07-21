@@ -13,16 +13,19 @@
             <div class="card-body">
                 <h2 class="text-center"><strong>Partner Bhayangkara</strong></h2>
                 <p>
-                    Partner Bhayangkara adalah media digital yang fokus menyajikan informasi dan pemberitaan seputar
-                    Kepolisian Negara Republik Indonesia (Polri). Berita yang kami sajikan mencakup aktivitas institusi
+                    <strong>Partner Bhayangkara</strong> adalah media digital yang fokus menyajikan informasi dan
+                    pemberitaan seputar
+                    <strong>Kepolisian Negara Republik Indonesia (Polri)</strong>. Berita yang kami sajikan mencakup
+                    aktivitas institusi
                     kepolisian dari tingkat pusat hingga daerah, kebijakan dan program kerja, tokoh Polri, kegiatan sosial,
                     serta kolaborasi antara polisi dan masyarakat.
                     <br><br>
-                    Kami berdiri atas dasar objektivitas, netralitas, dan tanggung jawab sosial, guna membangun jembatan
+                    Kami berdiri atas dasar <strong>objektivitas, netralitas, dan tanggung jawab sosial</strong> guna
+                    membangun jembatan
                     komunikasi
                     yang positif antara Polri dan masyarakat luas.
                 </p>
-                <h4>Misi Kami</h4>
+                <h5><strong>Misi Kami</strong></h5>
                 <ol>
                     <li>Menyampaikan berita kepolisian yang akurat dan terpercaya</li>
                     <li>Meningkatkan pemahaman masyarakat terhadap peran dan tugas Polri</li>
@@ -36,6 +39,32 @@
                     Kami hadir sebagai media yang mendekatkan masyarakat dengan institusi kepolisian melalui pemberitaan
                     yang membangun, mengedukasi, dan memperkuat sinergi antara aparat penegak hukum dan warga negara.
                 </p>
+
+                <h5><strong>Informasi Legalitas</strong></h5>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>AHU Perubahan</td>
+                            <td>:</td>
+                            <td>AHU-0086164.AH.01.02.TAHUN 2022</td>
+                        </tr>
+                        <tr>
+                            <td>NIB</td>
+                            <td>:</td>
+                            <td>2009240118601</td>
+                        </tr>
+                        <tr>
+                            <td>NPWP</td>
+                            <td>:</td>
+                            <td>80.368.040.4-424.000</td>
+                        </tr>
+                        <tr>
+                            <td>No. Surat Notaris</td>
+                            <td>:</td>
+                            <td>777</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

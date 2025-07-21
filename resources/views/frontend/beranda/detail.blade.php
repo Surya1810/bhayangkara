@@ -10,7 +10,7 @@
 @section('content')
     <div class="container my-3">
         <div class="row g-5">
-            <div class="col-md-8">
+            <div class="col-md-8 bg-light">
                 <article class="blog-post">
                     <img src="{{ asset('storage/post/' . $news->image) }}" class="d-block w-100 mb-3"
                         alt="{{ $news->slug }}">
@@ -38,23 +38,6 @@
                             @endforeach
                         </ul>
                     </div>
-                    {{-- <div class="p-4">
-                        <h4 class="fst-italic">Kategori</h4>
-                        <ol class="list-unstyled mb-0">
-                            <li><a href="#">Kateogiu</a></li>
-                            <li><a href="#">February 2021</a></li>
-                            <li><a href="#">January 2021</a></li>
-                            <li><a href="#">December 2020</a></li>
-                            <li><a href="#">November 2020</a></li>
-                            <li><a href="#">October 2020</a></li>
-                            <li><a href="#">September 2020</a></li>
-                            <li><a href="#">August 2020</a></li>
-                            <li><a href="#">July 2020</a></li>
-                            <li><a href="#">June 2020</a></li>
-                            <li><a href="#">May 2020</a></li>
-                            <li><a href="#">April 2020</a></li>
-                        </ol>
-                    </div> --}}
                 </div>
             </div>
         </div>

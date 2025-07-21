@@ -23,6 +23,9 @@
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous">
     </script>
 
+    <!-- Sweetalert2 -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open Sans:400,500,600,700,800,900&display=swap"
         rel="stylesheet" />
@@ -38,7 +41,7 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background-image: url('{{ asset('assets/img/background/1.png') }}');
+            background-image: url('{{ asset('assets/img/background/2.jpg') }}');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -68,6 +71,7 @@
         <div class="container">
             <a class="navbar-brand" href="{{ route('landing') }}">
                 <img src="{{ asset('assets/img/logo/main_logo.png') }}" alt="logo" height="60">
+                <span class="fs-6 ms-2 text-danger"><strong>Partner Bhayangkara</strong></span>
             </a>
             <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse"
                 aria-label="Toggle navigation">
@@ -84,6 +88,13 @@
                             Kami</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link mx-2 text-black" aria-current="page" href="{{ route('redaksi') }}">Tim
+                            Redaksi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-2 text-black" aria-current="page" href="{{ route('lapor') }}">Lapor</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link mx-2 text-black" aria-current="page" href="{{ route('kontak') }}">Kontak</a>
                     </li>
                 </ul>
@@ -91,13 +102,16 @@
         </div>
     </nav>
 
-    <div class="nav-scroller bg-body shadow-sm">
+    <div class="nav-scroller bg-danger shadow-sm">
         <div class="container">
             <nav class="nav" aria-label="Secondary navigation">
-                <a class="nav-link active text-decoration-none"
-                    aria-current="page">{{ $time->toFormattedDateString() }}</a>
-                <a class="nav-link"><i class="fa-solid fa-envelope"></i>
-                    partnernewsbhayangkara@gmail.com</a>
+                <a class="nav-link active text-decoration-none text-white"
+                    aria-current="page"><strong>{{ $time->toFormattedDateString() }}</strong></a>
+
+                @foreach ($categories as $category)
+                    <a href="{{ route('kategori', $category->slug) }}" class="nav-link text-white">
+                        {{ $category->name }}</a>
+                @endforeach
             </nav>
         </div>
     </div>
@@ -108,35 +122,86 @@
     </main>
 
     <!-- Main Footer -->
-    <div class="container">
-        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-            <p class="col-md-4 mb-0 text-body-secondary">© 2025 <strong>Partner Bhayangkara</strong></p> <a
-                href="{{ route('landing') }}"
-                class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"
-                aria-label="Bootstrap"> <img src="{{ asset('assets/img/logo/main_logo.png') }}" alt="logo"
-                    height="60"></a>
-            <ul class="nav col-md-4 justify-content-end">
-                @guest
-                    <li class="nav-item"><a href="{{ route('login') }}" class="nav-link px-2 text-body-secondary">Masuk</a>
-                    </li>
-                    <li class="nav-item"><a href="{{ route('register') }}"
-                            class="nav-link px-2 text-body-secondary">Daftar</a></li>
-                @endguest
+    <footer class="bg-light">
+        <div class="container pt-5 pb-2">
+            <div class="row">
+                <div class="col-12 col-md-5 mb-3">
+                    <a href="{{ route('landing') }}"
+                        class="d-flex align-items-center mb-5 link-body-emphasis text-decoration-none">
+                        <img src="{{ asset('assets/img/logo/main_logo.png') }}" alt="PWRI-B" height="80px">
+                        <span class="fs-4 ms-2 text-danger"><strong>Partner Bhayangkara</strong></span>
+                    </a>
+                    <p class="text-danger">Media Online Mitra Polri</p>
+                    <p class="text-dark">
+                        <i class="fa-solid fa-location-dot me-3"></i>
+                        Jl. Tubagus Ismail VIII No.41 RT.002 RW.010, Kelurahan Sekeloa, Kecamatan Coblong, Kota
+                        Bandung
+                    </p>
+                    <p class="text-dark">
+                        <i class="fa-solid fa-envelope-open-text me-3"></i>
+                        partnernewsbhayangkara@gmail.com
+                    </p>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-6 col-md-3 mb-3">
+                    <h5 class="text-danger">MENU</h5>
+                    <hr class="text-dark">
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="{{ route('landing') }}"
+                                class="nav-link p-0 text-dark">Beranda</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href="{{ route('tentang') }}"
+                                class="nav-link p-0 text-dark">Tentang Kami</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href="{{ route('redaksi') }}" class="nav-link p-0 text-dark">Tim
+                                Redaksi</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href="{{ route('lapor') }}"
+                                class="nav-link p-0 text-dark">Lapor</a>
+                        </li>
+                        <li class="nav-item mb-2"><a href="{{ route('kontak') }}"
+                                class="nav-link p-0 text-dark">Kontak</a>
+                        </li>
+                        @guest
+                            <li class="nav-item mb-2"><a href="{{ route('login') }}"
+                                    class="nav-link p-0 text-dark">Masuk</a>
+                            </li>
+                            <li class="nav-item mb-2"><a href="{{ route('register') }}"
+                                    class="nav-link p-0 text-dark">Daftar</a>
+                            </li>
+                        @endguest
 
-                @auth
-                    <li class="nav-item"><a href="{{ route('dashboard') }}"
-                            class="nav-link px-2 text-body-secondary">Halaman Admin</a></li>
-                @endauth
+                        @auth
+                            <li class="nav-item mb-2"><a href="{{ route('dashboard') }}"
+                                    class="nav-link p-0 text-dark">Halaman Admin</a>
+                            </li>
+                        @endauth
 
-
-            </ul>
-        </footer>
-    </div>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3 mb-3">
+                    <h5 class="text-danger">KATEGORI</h5>
+                    <hr class="text-dark">
+                    <ul class="nav flex-column">
+                        @foreach ($categories as $category)
+                            <li class="nav-item mb-2"><a href="{{ route('kategori', $category->slug) }}"
+                                    class="nav-link p-0 text-dark">{{ $category->name }}</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            <div class="row text-center pt-4 mt-4 mb-3 border-top text-dark">
+                <small>&copy; Copyright 2025 <strong class="text-danger">Partner Bhayangkara</strong> - All rights
+                    reserved.</small>
+            </div>
+        </div>
+    </footer>
 
     <!-- Back to top button -->
     <button type="button" class="btn btn-dark btn-floating btn-lg shadow-lg " id="btn-back-to-top"
         aria-label="Back to Top">
-        <i class="fas fa-angle-up fa-2xl text-center" style="color: #FFFFFF"></i>
+        <i class="fas fa-angle-up fa-2xl text-center" style="color: #fff"></i>
     </button>
 
     <!-- REQUIRED SCRIPTS -->
@@ -178,6 +243,67 @@
             document.body.scrollTop = 0;
             document.documentElement.scrollTop = 0;
         }
+    </script>
+
+    <!-- Sweetalert2 -->
+    <script>
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top',
+            iconColor: 'white',
+            customClass: {
+                popup: 'colored-toast'
+            },
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true
+        })
+
+        @if (session('pesan'))
+            @switch(session('level-alert'))
+                @case('alert-success')
+                Toast.fire({
+                    icon: 'success',
+                    title: '{{ Session::get('pesan') }}'
+                })
+                @break
+
+                @case('alert-danger')
+                Toast.fire({
+                    icon: 'error',
+                    title: '{{ Session::get('pesan') }}'
+                })
+                @break
+
+                @case('alert-warning')
+                Toast.fire({
+                    icon: 'warning',
+                    title: '{{ Session::get('pesan') }}'
+                })
+                @break
+
+                @case('alert-question')
+                Toast.fire({
+                    icon: 'question',
+                    title: '{{ Session::get('pesan') }}'
+                })
+                @break
+
+                @default
+                Toast.fire({
+                    icon: 'info',
+                    title: '{{ Session::get('pesan') }}'
+                })
+            @endswitch
+        @endif
+        @if (count($errors) > 0)
+            @foreach ($errors->all() as $error)
+                Toast.fire({
+                    icon: 'error',
+                    title: '{{ $error }}'
+                })
+            @endforeach
+        @endif
     </script>
 
     @stack('scripts')
