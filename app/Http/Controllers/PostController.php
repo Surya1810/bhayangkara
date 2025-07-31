@@ -155,6 +155,9 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::findorfail($id);
+        if ($post->image && Storage::disk('public')->exists('post/' . $post->image)) {
+            Storage::disk('public')->delete('post/' . $post->image);
+        }
         $post->delete();
 
         return redirect()->route('posts.index')->with(['pesan' => 'Berita Berhasil Dihapus', 'level-alert' => 'alert-danger']);
