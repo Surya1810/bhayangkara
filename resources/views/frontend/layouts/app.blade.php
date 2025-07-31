@@ -26,12 +26,28 @@
     <!-- Sweetalert2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('assets/AdminLTE/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('assets/AdminLTE/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open Sans:400,500,600,700,800,900&display=swap"
         rel="stylesheet" />
 
     <!-- Our style -->
     <link rel="stylesheet" href="{{ asset('assets/css/style_fe.css') }}">
+
+    <!-- TinyMCE -->
+    <script src="https://cdn.tiny.cloud/1/4ce77u0y45a0kxjxqgmq8hyqdgrqd8pdetaervdmri41d1qa/tinymce/7/tinymce.min.js"
+        referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea#desc',
+            plugins: 'code table lists',
+            toolbar: 'undo redo | blocks| bold italic | bullist numlist | code | table | alignleft aligncenter alignright alignjustify | indent outdent'
+        });
+    </script>
 
     <style>
         .background-wrapper {
@@ -97,6 +113,29 @@
                     <li class="nav-item">
                         <a class="nav-link mx-2 text-black" aria-current="page" href="{{ route('kontak') }}">Kontak</a>
                     </li>
+                    @auth
+                        <li class="nav-item dropdown">
+                            <button
+                                class="nav-link dropdown-toggle text-black {{ request()->is('posts*') ? 'active' : '' }}"
+                                type="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ route('posts.create') }}">Buat Berita</a></li>
+                                @if (Auth::user()->role == 'Admin')
+                                    <li><a class="dropdown-item" href="{{ route('posts.index') }}">Approval Berita</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('anggota.index') }}">Approval
+                                            Pendaftaran</a>
+                                    </li>
+                                @endif
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    @endauth
                 </ul>
             </div>
         </div>
@@ -122,7 +161,7 @@
     </main>
 
     <!-- Main Footer -->
-    <footer class="bg-light">
+    <footer class="bg-dark">
         <div class="container pt-5 pb-2">
             <div class="row">
                 <div class="col-12 col-md-5 mb-3">
@@ -132,12 +171,12 @@
                         <span class="fs-4 ms-2 text-danger"><strong>Partner Bhayangkara</strong></span>
                     </a>
                     <p class="text-danger">Media Online Mitra Polri</p>
-                    <p class="text-dark">
+                    <p class="text-light">
                         <i class="fa-solid fa-location-dot me-3"></i>
                         Jl. Tubagus Ismail VIII No.41 RT.002 RW.010, Kelurahan Sekeloa, Kecamatan Coblong, Kota
                         Bandung
                     </p>
-                    <p class="text-dark">
+                    <p class="text-light">
                         <i class="fa-solid fa-envelope-open-text me-3"></i>
                         partnernewsbhayangkara@gmail.com
                     </p>
@@ -145,53 +184,47 @@
                 <div class="col-md-1"></div>
                 <div class="col-6 col-md-3 mb-3">
                     <h5 class="text-danger">MENU</h5>
-                    <hr class="text-dark">
+                    <hr class="text-light">
                     <ul class="nav flex-column">
                         <li class="nav-item mb-2"><a href="{{ route('landing') }}"
-                                class="nav-link p-0 text-dark">Beranda</a>
+                                class="nav-link p-0 text-light">Beranda</a>
                         </li>
                         <li class="nav-item mb-2"><a href="{{ route('tentang') }}"
-                                class="nav-link p-0 text-dark">Tentang Kami</a>
+                                class="nav-link p-0 text-light">Tentang Kami</a>
                         </li>
-                        <li class="nav-item mb-2"><a href="{{ route('redaksi') }}" class="nav-link p-0 text-dark">Tim
+                        <li class="nav-item mb-2"><a href="{{ route('redaksi') }}"
+                                class="nav-link p-0 text-light">Tim
                                 Redaksi</a>
                         </li>
                         <li class="nav-item mb-2"><a href="{{ route('lapor') }}"
-                                class="nav-link p-0 text-dark">Lapor</a>
+                                class="nav-link p-0 text-light">Lapor</a>
                         </li>
                         <li class="nav-item mb-2"><a href="{{ route('kontak') }}"
-                                class="nav-link p-0 text-dark">Kontak</a>
+                                class="nav-link p-0 text-light">Kontak</a>
                         </li>
                         @guest
                             <li class="nav-item mb-2"><a href="{{ route('login') }}"
-                                    class="nav-link p-0 text-dark">Masuk</a>
+                                    class="nav-link p-0 text-light">Masuk</a>
                             </li>
                             <li class="nav-item mb-2"><a href="{{ route('register') }}"
-                                    class="nav-link p-0 text-dark">Daftar</a>
+                                    class="nav-link p-0 text-light">Daftar</a>
                             </li>
                         @endguest
-
-                        @auth
-                            <li class="nav-item mb-2"><a href="{{ route('dashboard') }}"
-                                    class="nav-link p-0 text-dark">Halaman Admin</a>
-                            </li>
-                        @endauth
-
                     </ul>
                 </div>
                 <div class="col-6 col-md-3 mb-3">
                     <h5 class="text-danger">KATEGORI</h5>
-                    <hr class="text-dark">
+                    <hr class="text-light">
                     <ul class="nav flex-column">
                         @foreach ($categories as $category)
                             <li class="nav-item mb-2"><a href="{{ route('kategori', $category->slug) }}"
-                                    class="nav-link p-0 text-dark">{{ $category->name }}</a>
+                                    class="nav-link p-0 text-light">{{ $category->name }}</a>
                             </li>
                         @endforeach
                     </ul>
                 </div>
             </div>
-            <div class="row text-center pt-4 mt-4 mb-3 border-top text-dark">
+            <div class="row text-center pt-4 mt-4 mb-3 border-top text-light">
                 <small>&copy; Copyright 2025 <strong class="text-danger">Partner Bhayangkara</strong> - All rights
                     reserved.</small>
             </div>
@@ -208,6 +241,8 @@
 
     <!-- Jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!-- Select2 -->
+    <script src="{{ asset('assets/AdminLTE/plugins/select2/js/select2.full.min.js') }}"></script>
 
     <script>
         (() => {

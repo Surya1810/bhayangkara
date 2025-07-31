@@ -6,6 +6,8 @@ use App\Models\Category;
 use App\Models\lapor;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\LaporanMasuk;
 
 class PageController extends Controller
 {
@@ -57,6 +59,7 @@ class PageController extends Controller
 
         return view('frontend.lapor.index', compact('categories'));
     }
+
     public function laporan(Request $request)
     {
         $request->validate([
@@ -71,7 +74,7 @@ class PageController extends Controller
         $path = $request->file('file')->store('bukti', 'public');
 
         // Simpan ke database
-        lapor::create([
+        $laporan = lapor::create([
             'name' => $request->name,
             'ktp' => $request->ktp,
             'phone' => $request->phone,
@@ -79,8 +82,15 @@ class PageController extends Controller
             'file_path' => $path,
         ]);
 
-        return redirect()->back()->with(['pesan' => 'Laporan berhasil dikirim', 'level-alert' => 'alert-success']);
+        // Kirim email dengan attachment
+        Mail::to('partnernewsbhayangkara@gmail.com')->send(new LaporanMasuk($laporan));
+
+        return redirect()->back()->with([
+            'pesan' => 'Laporan berhasil dikirim',
+            'level-alert' => 'alert-success'
+        ]);
     }
+
 
     public function kontak()
     {

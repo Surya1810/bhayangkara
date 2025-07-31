@@ -19,9 +19,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::where('is_approved', true)->get();
+        $categories = Category::all();
+        $posts = Post::latest()->get();
 
-        return view('backend.post.created', compact('posts'));
+        return view('frontend.admin.berita.index', compact('posts', 'categories'));
     }
 
     /**
@@ -32,7 +33,7 @@ class PostController extends Controller
         $categories = Category::all();
         $users = User::all();
 
-        return view('backend.post.create', compact('categories', 'users'));
+        return view('frontend.admin.berita.create', compact('categories', 'users'));
     }
 
     /**
@@ -93,7 +94,7 @@ class PostController extends Controller
         $post = Post::find($id);
         $categories = Category::all();
 
-        return view('backend.post.edit', compact('post', 'categories'));
+        return view('frontend.admin.berita.edit', compact('post', 'categories'));
     }
 
     /**
@@ -101,46 +102,52 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $post = Post::find($id);
         $this->validate($request, [
-            'title' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,webp|max:2048',
+            'title'      => 'required',
+            'image'      => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
             'categories' => 'required',
-            'body' => 'required',
+            'body'       => 'required',
         ]);
 
-        if ($request->hasFile('image')) {
+        $post = Post::findOrFail($id);
+
+        $image = $request->file('image');
+        if (isset($image)) {
             if (!Storage::disk('public')->exists('post')) {
                 Storage::disk('public')->makeDirectory('post');
             }
 
-            //delete old post image
-            if (Storage::disk('public')->exists('post/' . $post->image)) {
+            // Hapus gambar lama jika ada
+            if ($post->image && $post->image !== 'default.png' && Storage::disk('public')->exists('post/' . $post->image)) {
                 Storage::disk('public')->delete('post/' . $post->image);
             }
 
+            // Baca dan simpan gambar baru
             $image = Image::read($request->file('image'));
-
-            // Main Image Upload on Folder Code
             $imageName = uniqid() . time() . '-' . $request->file('image')->getClientOriginalName();
             $destinationPath = 'post/' . $imageName;
-            // Simpan gambar ke disk 'public'
             Storage::disk('public')->put($destinationPath, (string) $image->toWebp(90));
         } else {
-            $imageName = $post->image;
+            $imageName = $post->image; // gunakan gambar lama jika tidak ada upload baru
         }
 
-        $post->user_id = Auth::id();
-        $post->title = $request->title;
-        $post->slug = Str::slug($request->title);
-        $post->image = $imageName;
-        $post->body = $request->body;
+        // Update post
+        $post->user_id     = Auth::id();
+        $post->title       = $request->title;
+        $post->slug        = Str::slug($request->title);
+        $post->image       = $imageName;
+        $post->body        = $request->body;
         $post->category_id = $request->categories;
         $post->is_approved = false;
-        $post->update();
+        $post->save();
 
-        return redirect()->route('posts.index')->with(['pesan' => 'Post Berhasil Diperbarui', 'level-alert' => 'alert-success']);
+        return redirect()->route('posts.index')->with([
+            'pesan' => 'Post Berhasil Diperbarui',
+            'level-alert' => 'alert-success'
+        ]);
     }
+
+
 
     /**
      * Remove the specified resource from storage.

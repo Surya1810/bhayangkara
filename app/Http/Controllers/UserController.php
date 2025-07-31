@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,9 +14,10 @@ class UserController extends Controller
      */
     public function index()
     {
+        $categories = Category::all();
         $users = User::latest()->get();
 
-        return view('backend.member.index', compact('users'));
+        return view('frontend.admin.anggota.index', compact('users', 'categories'));
     }
 
     /**
@@ -67,7 +69,7 @@ class UserController extends Controller
         $user = User::findorfail($id);
         $user->delete();
 
-        return redirect()->route('users.index')->with(['pesan' => 'User Berhasil Dihapus', 'level-alert' => 'alert-danger']);
+        return redirect()->route('anggota.index')->with(['pesan' => 'User Berhasil Dihapus', 'level-alert' => 'alert-danger']);
     }
 
     public function approval()
