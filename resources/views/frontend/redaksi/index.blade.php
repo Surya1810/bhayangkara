@@ -35,11 +35,11 @@
                 </tr>
                 <tr>
                     <td>Redaktur Pelaksana</td>
-                    <td>Rudy Haryanto,S.Pd</td>
+                    <td>Sweden Simarmata,S.H,M.H</td>
                 </tr>
                 <tr>
                     <td>Manajer Bisnis</td>
-                    <td></td>
+                    <td>Rudy Haryanto,S.Pd</td>
                 </tr>
                 <tr>
                     <td>Keuangan</td>
