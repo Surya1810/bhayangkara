@@ -45,6 +45,9 @@
                             <table id="postTable" class="table table-bordered text-sm">
                                 <thead class="table-dark">
                                     <tr>
+                                        <th style="width: 5%">
+                                            Aksi
+                                        </th>
                                         <th>
                                             Judul
                                         </th>
@@ -54,14 +57,26 @@
                                         <th style="width: 5%">
                                             Status
                                         </th>
-                                        <th style="width: 5%">
-                                            Aksi
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($posts as $post)
                                         <tr>
+                                            <td>
+                                                <button class="btn btn-sm btn-danger rounded-web"
+                                                    onclick="deletePost({{ $post->id }})"><i
+                                                        class="fas fa-trash"></i></button>
+                                                <form id="delete-form-{{ $post->id }}"
+                                                    action="{{ route('posts.destroy', $post->id) }}" method="POST"
+                                                    style="display: none;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                </form>
+
+                                                <a href="{{ route('posts.approve', $post->id) }}"
+                                                    class="btn btn-sm btn-success rounded-web"><i
+                                                        class="fa-solid fa-circle-check"></i></a>
+                                            </td>
                                             <td>{{ $post->title }}</td>
                                             <td>
                                                 <img src="{{ asset('storage/post/' . $post->image) }}" alt="Gambar"
@@ -77,21 +92,6 @@
                                                         Terbit
                                                     </span>
                                                 @endif
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-sm btn-danger rounded-web"
-                                                    onclick="deletePost({{ $post->id }})"><i
-                                                        class="fas fa-trash"></i></button>
-                                                <form id="delete-form-{{ $post->id }}"
-                                                    action="{{ route('posts.destroy', $post->id) }}" method="POST"
-                                                    style="display: none;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                </form>
-
-                                                <a href="{{ route('posts.approve', $post->id) }}"
-                                                    class="btn btn-sm btn-success rounded-web"><i
-                                                        class="fa-solid fa-circle-check"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
