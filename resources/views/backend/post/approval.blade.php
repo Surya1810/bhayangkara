@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <div class="card-body table-responsive">
-                            <table id="postTable" class="table table-bordered text-nowrap text-sm">
+                            <table id="postTable" class="table table-bordered text-sm">
                                 <thead class="table-dark">
                                     <tr>
                                         <th>

@@ -46,9 +46,10 @@
                     @foreach ($latest as $key => $news)
                         <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
                             <a href="{{ route('detail.berita', $news->slug) }}">
-                                <div class="ratio ratio-16x9">
-                                    <img src="{{ asset('storage/post/' . $news->image) }}" class="d-block w-100"
-                                        alt="{{ $news->slug }}">
+                                <div
+                                    style="position: relative; width: 100%; padding-top: 56.25%; overflow: hidden; border-top-left-radius: 0.375rem; border-bottom-left-radius: 0.375rem;">
+                                    <img src="{{ asset('storage/post/' . $news->image) }}" alt="{{ $news->slug }}"
+                                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;">
                                 </div>
                                 <div class="carousel-caption d-block text-white bg-dark bg-opacity-50 p-2 rounded">
                                     <h5 class="fw-bold mb-0 fs-6 fs-md-3 fs-lg-2">

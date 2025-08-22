@@ -72,7 +72,10 @@ class PostController extends Controller
         $post->image = $imageName;
         $post->body = $request->body;
         $post->category_id = $request->categories;
-        $post->is_approved = false;
+        if (auth()->user()->role == 'Anggota') {
+            $post->is_approved = false;
+        }
+        $post->is_approved = true;
         $post->save();
 
         return redirect()->route('posts.index')->with(['pesan' => 'Berita Berhasil Dibuat, Menunggu Approval', 'level-alert' => 'alert-success']);
@@ -146,8 +149,6 @@ class PostController extends Controller
             'level-alert' => 'alert-success'
         ]);
     }
-
-
 
     /**
      * Remove the specified resource from storage.

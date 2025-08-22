@@ -34,7 +34,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="title" class="mb-0 form-label col-form-label-sm">Judul</label>
+                                    <label for="title"
+                                        class="mb-0 form-label col-form-label-sm fw-semibold">Judul</label>
                                     <input type="text" class="form-control @error('title') is-invalid @enderror"
                                         id="title" name="title" placeholder="Tulis judul berita"
                                         value="{{ old('title') }}">
@@ -45,9 +46,8 @@
                                     @enderror
 
                                     <div class="form-group">
-                                        <label class="mb-0 form-label col-form-label-sm col-form-label-sm mt-2"
-                                            for="image">Thumbnail <small class="text-danger">*Thumbnail ratio
-                                                4:3</small></label>
+                                        <label class="mb-0 form-label col-form-label-sm col-form-label-sm mt-2 fw-semibold"
+                                            for="image">Thumbnail</label>
                                         <div class="input-group">
                                             <div class="custom-file">
                                                 <input class="form-control @error('image') is-invalid @enderror"
@@ -56,9 +56,9 @@
                                             </div>
                                         </div>
                                     </div>
-
                                     <div class="form-group">
-                                        <label class="mb-0 form-label col-form-label-sm" for="categories">Categories</label>
+                                        <label class="mb-0 form-label col-form-label-sm fw-semibold"
+                                            for="categories">Kategori</label>
                                         <select
                                             class="form-control categories select2 @error('categories') is-invalid @enderror"
                                             style="width: 100%;" id="categories" name="categories">
@@ -76,9 +76,11 @@
                                             </span>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="form-group mt-2">
-                                    <textarea name="body" id="body" placeholder="tulis berita anda...">{{ old('title') }}</textarea>
+                                    <div class="form-group mt-2">
+                                        <label class="mb-0 form-label col-form-label-sm fw-semibold"
+                                            for="categories">Berita</label>
+                                        <textarea name="body" id="body" placeholder="tulis berita anda...">{{ old('title') }}</textarea>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-footer rounded-web">
