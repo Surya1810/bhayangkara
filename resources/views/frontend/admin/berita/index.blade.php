@@ -31,6 +31,9 @@
                             <table id="postTable" class="table table-bordered text-nowrap text-sm">
                                 <thead class="table-dark">
                                     <tr>
+                                        <th style="width: 10%">
+                                            Aksi
+                                        </th>
                                         <th>
                                             Judul
                                         </th>
@@ -43,27 +46,11 @@
                                         <th style="width: 10%">
                                             Tanggal Terbit
                                         </th>
-                                        <th style="width: 10%">
-                                            Aksi
-                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($posts as $post)
                                         <tr>
-                                            <td>{{ $post->title }}</td>
-                                            <td>
-                                                <img src="{{ asset('storage/post/' . $post->image) }}" alt="Gambar"
-                                                    width="50">
-                                            </td>
-                                            <td>
-                                                @if ($post->is_approved == false)
-                                                    Pending
-                                                @else
-                                                    Terbit
-                                                @endif
-                                            </td>
-                                            <td>{{ $post->created_at }}</td>
                                             <td>
                                                 <button class="btn btn-sm btn-danger rounded-web"
                                                     onclick="deletePost({{ $post->id }})"><i
@@ -83,6 +70,19 @@
                                                             class="fa-solid fa-circle-check"></i></a>
                                                 @endif
                                             </td>
+                                            <td>{{ $post->title }}</td>
+                                            <td>
+                                                <img src="{{ asset('storage/post/' . $post->image) }}" alt="Gambar"
+                                                    width="50">
+                                            </td>
+                                            <td>
+                                                @if ($post->is_approved == false)
+                                                    Pending
+                                                @else
+                                                    Terbit
+                                                @endif
+                                            </td>
+                                            <td>{{ $post->created_at }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
