@@ -8,6 +8,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\LaporanMasuk;
+use App\Models\Video;
 
 class PageController extends Controller
 {
@@ -16,48 +17,43 @@ class PageController extends Controller
     {
         $latest = Post::where('is_approved', true)->latest()->take(3)->get();
         $beritas = Post::where('is_approved', true)->latest()->skip(3)->take(60)->paginate(6);
-        $categories = Category::all();
+        $videos = Video::latest()->take(40)->paginate(4);
 
-        return view('frontend.beranda.index',  compact('latest', 'beritas', 'categories'));
+        return view('frontend.beranda.index',  compact('latest', 'beritas', 'videos'));
     }
 
     public function detail_berita($slug)
     {
         $latest = Post::where('is_approved', true)->latest()->take(3)->get();
         $news = Post::where('slug', $slug)->first();
-        $categories = Category::all();
 
-        return view('frontend.beranda.detail',  compact('latest', 'news', 'categories'));
+        return view('frontend.beranda.detail',  compact('latest', 'news'));
     }
 
     public function kategori($slug)
     {
         $categories = Category::where('slug', $slug)->first();
         $beritas = Post::where('is_approved', true)->where('category_id', $categories->id)->latest()->skip(3)->take(60)->paginate(6);
-        $categories = Category::all();
 
-        return view('frontend.beranda.kategori',  compact('beritas', 'categories'));
+        return view('frontend.beranda.kategori',  compact('beritas'));
     }
 
     public function tentang()
     {
-        $categories = Category::all();
 
-        return view('frontend.tentang.index', compact('categories'));
+        return view('frontend.tentang.index');
     }
 
     public function redaksi()
     {
-        $categories = Category::all();
 
-        return view('frontend.redaksi.index', compact('categories'));
+        return view('frontend.redaksi.index');
     }
 
     public function lapor()
     {
-        $categories = Category::all();
 
-        return view('frontend.lapor.index', compact('categories'));
+        return view('frontend.lapor.index');
     }
 
     public function laporan(Request $request)
@@ -94,8 +90,6 @@ class PageController extends Controller
 
     public function kontak()
     {
-        $categories = Category::all();
-
-        return view('frontend.kontak.index', compact('categories'));
+        return view('frontend.kontak.index',);
     }
 }

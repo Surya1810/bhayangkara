@@ -74,10 +74,37 @@
         }
     </style>
 
+    <style>
+        /* Default untuk layar besar (≥1400px) */
+        .floating-ad {
+            width: 160px;
+            height: auto;
+        }
+
+        /* Laptop sedang (≥992px dan <1400px) */
+        @media (max-width: 1399px) {
+            .floating-ad {
+                width: 100px;
+                height: auto;
+            }
+        }
+
+        /* Laptop kecil (≥992px dan <1200px) */
+        @media (max-width: 1199px) {
+            .floating-ad {
+                width: 80px;
+                height: auto;
+            }
+        }
+    </style>
+
     @stack('css')
 </head>
 
 <body style="padding-top: 85px">
+    @php
+        $categories = \App\Models\Category::all();
+    @endphp
     <div class="background-wrapper"></div>
     @php
         $time = Carbon\Carbon::now();
@@ -125,6 +152,10 @@
                                     <li><a class="dropdown-item" href="{{ route('anggota.index') }}">Approval
                                             Pendaftaran</a>
                                     </li>
+                                    <li><a class="dropdown-item" href="{{ route('video.create') }}">Unggah Video</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="{{ route('pengumuman.create') }}">Unggah
+                                            Pengumuman</a></li>
                                 @endif
                                 <li>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -236,6 +267,9 @@
         aria-label="Back to Top">
         <i class="fas fa-angle-up fa-2xl text-center" style="color: #fff"></i>
     </button>
+
+    @include('components.ads')
+
 
     <!-- REQUIRED SCRIPTS -->
 

@@ -19,10 +19,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
         $posts = Post::latest()->get();
 
-        return view('frontend.admin.berita.index', compact('posts', 'categories'));
+        return view('frontend.admin.berita.index', compact('posts'));
     }
 
     /**

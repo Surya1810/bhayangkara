@@ -112,6 +112,35 @@
                 </div>
 
             </div>
+
+            <!-- Video -->
+            <section>
+                <div class="container mb-4">
+                    <h1 class="fs-3 fw-600 mb-3">Video</h1>
+                    <div class="row g-2">
+                        @foreach ($videos as $video)
+                            <div class="col-12 col-md-6">
+                                <div class="ratio ratio-16x9">
+                                    <iframe
+                                        src="https://www.youtube.com/embed/{{ \Illuminate\Support\Str::afterLast($video->youtube_url, 'v=') }}"
+                                        frameborder="0" allowfullscreen></iframe>
+                                </div>
+                                @auth
+                                    @if (Auth::user()->role == 'Admin')
+                                        <form action="{{ route('video.destroy', $video) }}" method="POST" class="d-inline">
+                                            @csrf @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm mt-2">Hapus</button>
+                                        </form>
+                                    @endif
+                                @endauth
+                            </div>
+                        @endforeach
+                        <div class="d-flex justify-content-center mt-4">
+                            {{ $videos->links() }}
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </section>
 @endsection

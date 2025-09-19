@@ -5,6 +5,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VideoController;
+use App\Http\Controllers\PengumumanController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,6 +33,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::put('/profile/update/{id}', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile/password/{id}', [ProfileController::class, 'password'])->name('profile.password');
     Route::delete('/profile/delete/{id}', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Video
+    Route::resource('video', VideoController::class);
+
+    // Pengumuman
+    Route::resource('pengumuman', PengumumanController::class)->only([
+        'create',
+        'store',
+        'destroy'
+    ]);
 
     //Category
     Route::resource('categories', CategoryController::class);

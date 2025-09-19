@@ -12,12 +12,7 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $categories = Category::latest()->get();
-
-        return view('backend.category & tag.index', compact('categories', 'tags'));
-    }
+    public function index() {}
 
     /**
      * Show the form for creating a new resource.

@@ -14,10 +14,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
         $users = User::latest()->get();
 
-        return view('frontend.admin.anggota.index', compact('users', 'categories'));
+        return view('frontend.admin.anggota.index', compact('users'));
     }
 
     /**
